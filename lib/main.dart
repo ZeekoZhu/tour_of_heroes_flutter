@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:tour_of_heroes/app.module.dart';
 import 'package:tour_of_heroes/hero-detail.dart';
-import 'package:tour_of_heroes/mock-heroes.dart';
+import 'package:tour_of_heroes/hero.service.dart';
 import 'package:tour_of_heroes/model/hero.dart' as Toh;
 
 void main() {
+  configureDependencies();
   runApp(MyApp());
 }
 
@@ -26,8 +28,18 @@ class HeroesPage extends StatefulWidget {
 }
 
 class _HeroesPageState extends State<HeroesPage> {
-  final _heroes = HEROES;
+  List<Toh.Hero> _heroes;
   Toh.Hero selectedHero;
+
+  @override
+  void initState() {
+    super.initState();
+    getIt<HeroService>().getHeroes().then((value) {
+      setState(() {
+        _heroes = value;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
