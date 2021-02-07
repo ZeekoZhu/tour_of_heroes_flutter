@@ -8,6 +8,7 @@ import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 
 import 'hero.service.dart';
+import 'message.service.dart';
 
 /// adds generated dependencies
 /// to the provided [GetIt] instance
@@ -18,6 +19,9 @@ GetIt $initGetIt(
   EnvironmentFilter environmentFilter,
 }) {
   final gh = GetItHelper(get, environment, environmentFilter);
-  gh.factory<HeroService>(() => HeroService());
+  gh.factory<HeroService>(() => HeroService(get<MessageService>()));
+
+  // Eager singletons must be registered in the right order
+  gh.singleton<MessageService>(MessageService());
   return get;
 }
