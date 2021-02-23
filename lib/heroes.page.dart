@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
+import 'package:tour_of_heroes/bottom-bar.dart';
 
 import 'app.module.dart';
 import 'hero-detail.dart';
@@ -52,6 +53,7 @@ class _HeroesPageState extends State<HeroesPage> {
           }),
         ],
       ),
+      bottomNavigationBar: BottomBar(1),
       body: Container(
         margin: EdgeInsets.symmetric(vertical: 16),
         child: Column(
