@@ -22,7 +22,7 @@ class _MessagesState extends State<Messages> {
                 .copyWith(color: Colors.redAccent),
           ),
           FlatButton(onPressed: () {
-            getIt<MessageService>().clear();
+            getIt<MessagesService>().clear();
           }, child: Text('clear'))
         ],
       ),

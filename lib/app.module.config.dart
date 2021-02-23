@@ -19,9 +19,9 @@ GetIt $initGetIt(
   EnvironmentFilter environmentFilter,
 }) {
   final gh = GetItHelper(get, environment, environmentFilter);
-  gh.factory<HeroService>(() => HeroService(get<MessageService>()));
+  gh.factory<HeroService>(() => HeroService(get<MessagesService>()));
 
   // Eager singletons must be registered in the right order
-  gh.singleton<MessageService>(MessageService());
+  gh.singleton<MessagesService>(MessagesService());
   return get;
 }
