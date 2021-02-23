@@ -44,7 +44,9 @@ class _HeroesPageState extends State<HeroesPage> {
           Consumer<MessagesService>(
               builder: (BuildContext context, value, Widget child) {
             return FlatButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, "/msg");
+                },
                 child: Text('Msg: ' + value.messages.length.toString(),
                     style: Theme.of(context).accentTextTheme.bodyText1));
           }),

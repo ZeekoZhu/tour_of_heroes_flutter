@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tour_of_heroes/app.module.dart';
 import 'package:tour_of_heroes/message.service.dart';
+import 'package:tour_of_heroes/messages.dart';
 
 import 'heroes.page.dart';
 
@@ -16,12 +17,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
-        home: HeroesPage());
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      initialRoute: "/",
+      routes: {
+        '/': (ctx) => HeroesPage(),
+        '/msg': (ctx) => Messages()
+      },
+    );
   }
 }
-
-
