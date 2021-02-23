@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tour_of_heroes/app.module.dart';
 import 'package:tour_of_heroes/dashboard.page.dart';
+import 'package:tour_of_heroes/hero-detail.dart';
 import 'package:tour_of_heroes/message.service.dart';
 import 'package:tour_of_heroes/messages.dart';
 
@@ -34,7 +35,8 @@ class MyApp extends StatelessWidget {
         }
       },
       routes: {
-        '/msg': (ctx) => Messages()
+        '/msg': (ctx) => Messages(),
+        HeroDetailPage.routeName: (ctx) => HeroDetailPage()
       },
     );
   }

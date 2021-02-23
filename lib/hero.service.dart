@@ -13,4 +13,9 @@ class HeroService {
     _messageService.add('HeroService: fetched heroes');
     return Future.value(HEROES);
   }
+
+  Future<Toh.Hero> getHero(int id) {
+    _messageService.add('HeroService: fetched hero $id');
+    return Future.value(HEROES.firstWhere((h) => h.id == id));
+  }
 }

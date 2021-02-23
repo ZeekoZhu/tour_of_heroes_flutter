@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:tour_of_heroes/app.module.dart';
 import 'package:tour_of_heroes/bottom-bar.dart';
+import 'package:tour_of_heroes/hero-detail.dart';
 import 'package:tour_of_heroes/hero.service.dart';
 import './model/hero.dart' as Toh;
 
@@ -38,7 +39,12 @@ class _DashboardPageState extends State<DashboardPage> {
                     .map((h) => FractionallySizedBox(
                           widthFactor: 0.48,
                           child: OutlinedButton(
-                            onPressed: () {},
+                            onPressed: () async {
+                              await Navigator.of(context).pushNamed(
+                                  HeroDetailPage.routeName,
+                                  arguments: h.id);
+                              setState(() {});
+                            },
                             child: Text(h.name),
                           ),
                         ))

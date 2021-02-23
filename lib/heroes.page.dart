@@ -16,13 +16,15 @@ class HeroesPage extends StatefulWidget {
 
 class _HeroesPageState extends State<HeroesPage> {
   List<Toh.Hero> _heroes = [];
-  Toh.Hero selectedHero;
   final _msgSvc = getIt<MessagesService>();
 
   handleSelect(Toh.Hero hero) {
-    setState(() {
-      selectedHero = hero;
+    setState(() async {
       _msgSvc.add('HeroesComponent: Selected hero id=${hero.id}');
+      await Navigator.of(context)
+          .pushNamed(HeroDetailPage.routeName, arguments: hero.id);
+      // reload list page
+      setState(() {});
     });
   }
 
@@ -72,17 +74,9 @@ class _HeroesPageState extends State<HeroesPage> {
                   context: context,
                   tiles: _heroes.map((h) => ListTile(
                         onTap: () => handleSelect(h),
-                        title: HeroListItem(h, h == selectedHero),
+                        title: HeroListItem(h),
                       ))).toList(),
             )),
-            HeroDetail(
-              selectedHero: selectedHero,
-              onNameChanged: (value) {
-                setState(() {
-                  selectedHero.name = value;
-                });
-              },
-            ),
           ],
         ),
       ),
@@ -91,11 +85,8 @@ class _HeroesPageState extends State<HeroesPage> {
 }
 
 class HeroListItem extends StatelessWidget {
-  HeroListItem(Toh.Hero hero, bool selected)
-      : _hero = hero,
-        _selected = selected;
+  HeroListItem(Toh.Hero hero) : _hero = hero;
   final Toh.Hero _hero;
-  final _selected;
 
   @override
   Widget build(BuildContext context) {
@@ -116,10 +107,10 @@ class HeroListItem extends StatelessWidget {
         ),
         Text(
           _hero?.name,
-          style: Theme.of(context).textTheme.bodyText2.copyWith(
-              color: _selected
-                  ? Theme.of(context).accentColor
-                  : Theme.of(context).textTheme.bodyText2.color),
+          style: Theme.of(context)
+              .textTheme
+              .bodyText2
+              .copyWith(color: Theme.of(context).textTheme.bodyText2.color),
         )
       ],
     );
