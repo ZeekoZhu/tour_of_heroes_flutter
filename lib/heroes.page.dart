@@ -28,14 +28,18 @@ class _HeroesPageState extends State<HeroesPage> {
     });
   }
 
+  Future _loadData() async {
+    await Future.delayed(Duration.zero);
+    final heroes = await getIt<HeroService>().getHeroes();
+    setState(() {
+      _heroes = heroes;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
-    getIt<HeroService>().getHeroes().then((value) {
-      setState(() {
-        _heroes = value;
-      });
-    });
+    _loadData();
   }
 
   @override

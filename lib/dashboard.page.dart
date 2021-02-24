@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:tour_of_heroes/app.module.dart';
@@ -58,10 +56,11 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   void initState() {
     super.initState();
-    getIt<HeroService>().getHeroes().then((value) {
-      setState(() {
-        _heroes = value.take(4).toList();
-        log(_heroes.toString());
+    Future.delayed(Duration.zero).then((_) {
+      getIt<HeroService>().getHeroes().then((value) {
+        setState(() {
+          _heroes = value.take(4).toList();
+        });
       });
     });
   }
